@@ -555,7 +555,9 @@ input.invalid { border-color: var(--red); background: var(--red-soft); }
   color: var(--blue-dark);
   font-size: 12.5px;
   font-weight: 700;
+  list-style: none;
 }
+.card-more summary::-webkit-details-marker { display: none; }
 .card-more summary::before { content: "＋ "; color: var(--blue); }
 .card-more[open] summary::before { content: "－ "; }
 .card-more .more-body {
