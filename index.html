@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>육아휴직·단축근무 정산 계산기 | 퇴사 전 5가지 점검과 이직확인서 4칸</title>
-<meta name="description" content="육아휴직과 육아기 근로시간 단축을 쓰고 퇴사할 때 연차수당·퇴직금·초과근무수당·실업급여를 계산하고, 이직확인서 이직사유·피보험단위기간·평균임금·소정근로시간 4칸을 함께 점검하는 자가 점검용 참고 계산기입니다.">
-<meta name="theme-color" content="#2b5bd7">
+<meta name="description" content="육아휴직과 육아기 근로시간 단축을 쓰고 퇴사할 때 연차수당·퇴직금·초과근무수당·실업급여를 계산하고, 이직확인서 4칸을 점검하는 자가 점검용 참고 계산기입니다. 회사가 안 지켜줄 때 대처 순서와 실제 고충 Q&amp;A도 함께 담았습니다.">
+<meta name="theme-color" content="#FBF4EA">
 <meta property="og:type" content="website">
 <meta property="og:title" content="육아휴직·단축근무 정산 계산기">
-<meta property="og:description" content="육아휴직·육아기 단축근무를 쓰고 퇴사할 때 놓치기 쉬운 5가지 정산 항목과 이직확인서 4칸을 한 번에 점검해 보세요.">
+<meta property="og:description" content="육아휴직·육아기 단축근무를 쓰고 퇴사할 때 놓치기 쉬운 5가지 정산 항목과 이직확인서 4칸, 회사가 안 줄 때 대처 순서까지 한 번에.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AE%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,456 +17,839 @@
 <header class="hero">
   <div class="hero-inner">
     <p class="eyebrow">퇴사 전 마지막 점검</p>
-    <h1>육아휴직·단축근무<br>정산 계산기</h1>
-    <p class="lede">육아휴직과 육아기 근로시간 단축을 쓰고 퇴사할 때, 회사가 빠뜨리기 쉬운 <strong>5가지 정산 항목</strong>과 <strong>이직확인서 4칸</strong>을 함께 점검해요.</p>
-    <p class="notice-top">
-      <strong>본 도구는 2026년 공개 법령 기준의 자가 점검용 참고 계산기이며, 개별 사건의 법적 판단·서류 작성 대행이 아닙니다.</strong>
-      실제 청구·진정은 관할 고용노동지청·고용센터·공인노무사를 통해 확인하세요. 이 계산기는 노무상담이나 진정서 작성을 대신하지 않습니다.
-    </p>
-    <p class="basis">기준: 2026년 11월 확인 · 최저임금 10,320원 · 구직급여 상한 68,100원 — 이직일이 2025년이면 2025년 기준으로 자동 바뀝니다.</p>
+    <h1>육아휴직·단축근무<br><span class="h1-soft">정산 계산기</span></h1>
+    <p class="lede">퇴사할 때 회사가 빠뜨리기 쉬운 <strong>5가지 정산 항목</strong>을 계산하고, 회사가 안 지켜줄 때 <strong>어디에 어떻게 말해야 하는지</strong>까지 함께 봐요.</p>
+    <p class="hero-note">2026년 11월 기준 · 최저임금 10,320원 · 이직일이 2025년이면 2025년 기준으로 자동으로 바뀌어요.</p>
   </div>
 </header>
 
+<nav class="tabbar" role="tablist" aria-label="메뉴">
+  <button class="tab is-active" id="tab-calc" role="tab" aria-selected="true" aria-controls="panel-calc" tabindex="0">
+    <span class="tab-ico" aria-hidden="true">🧮</span><span class="tab-label">계산하기</span>
+  </button>
+  <button class="tab" id="tab-help" role="tab" aria-selected="false" aria-controls="panel-help" tabindex="-1">
+    <span class="tab-ico" aria-hidden="true">🛟</span><span class="tab-label">안 줄 때</span>
+  </button>
+  <button class="tab" id="tab-qa" role="tab" aria-selected="false" aria-controls="panel-qa" tabindex="-1">
+    <span class="tab-ico" aria-hidden="true">💬</span><span class="tab-label">고충 Q&amp;A</span>
+  </button>
+  <button class="tab" id="tab-doc" role="tab" aria-selected="false" aria-controls="panel-doc" tabindex="-1">
+    <span class="tab-ico" aria-hidden="true">📄</span><span class="tab-label">이직확인서</span>
+  </button>
+</nav>
+
 <main>
 
-  <!-- ───────────── 입력 ───────────── -->
-  <section class="panel" id="input-panel" aria-labelledby="input-title">
-    <h2 class="section-title" id="input-title"><span class="step">입력</span> 내 근무 조건</h2>
+  <!-- ══════════════ 탭 1 · 계산하기 ══════════════ -->
+  <section id="panel-calc" class="tabpanel" role="tabpanel" aria-labelledby="tab-calc" tabindex="0">
 
-    <form id="calc-form" novalidate>
+    <div class="soft-note">
+      <p><strong>자가 점검용 참고 계산기예요.</strong> 개별 사건의 법적 판단이나 서류 작성을 대신하지 않아요. 실제 청구·진정은 고용노동부 <a href="tel:1350">1350</a>이나 관할 고용센터·공인노무사에게 확인해 주세요.</p>
+    </div>
 
-      <fieldset class="fset">
-        <legend>기본 정보</legend>
+    <details class="glossary">
+      <summary>
+        <span class="glossary-title">어려운 말, 이렇게 읽어요</span>
+        <span class="glossary-sub">소정근로시간 · 통상임금 · 평균임금 · 피보험단위기간 …</span>
+      </summary>
+      <dl class="glossary-list">
+        <div><dt>소정근로시간</dt><dd>회사와 “하루 이만큼 일하기로” 정한 시간이에요. 실제로 더 일한 연장시간은 빼고 봐요.</dd></div>
+        <div><dt>통상임금</dt><dd>매달 정해진 대로 받는 기본급과 고정수당을 시간급으로 환산한 금액. 연차수당·초과수당의 기준이 돼요.</dd></div>
+        <div><dt>평균임금</dt><dd>퇴직 전 3개월 동안 받은 임금 총액을 그 기간 날짜 수로 나눈 금액. 퇴직금의 기준이에요.</dd></div>
+        <div><dt>평균임금 산정제외기간</dt><dd>육아휴직·단축기간처럼 평균임금 계산에서 빼 주는 기간. 그 기간을 빼고 직전 3개월로 계산해요.</dd></div>
+        <div><dt>피보험단위기간</dt><dd>고용보험에서 ‘보수를 받은 날’을 세는 기간. 실업급여를 받으려면 합쳐서 180일 이상이어야 해요.</dd></div>
+        <div><dt>기초일액</dt><dd>실업급여 하루치를 계산하는 밑값. 보통 평균임금을 쓰고, 통상임금이 더 크면 통상임금을 써요.</dd></div>
+        <div><dt>소정급여일수</dt><dd>실업급여를 받을 수 있는 날 수. 나이와 가입기간에 따라 120~270일이에요.</dd></div>
+        <div><dt>이직확인서</dt><dd>회사가 고용센터에 내는 퇴사 확인 서류. 이직사유·피보험단위기간·평균임금·1일 소정근로시간 네 칸이 중요해요.</dd></div>
+        <div><dt>간이대지급금</dt><dd>회사가 돈을 줄 수 없을 때 나라(근로복지공단)가 대신 먼저 주는 제도. 나중에 나라가 회사에 받아내요.</dd></div>
+        <div><dt>지연이자</dt><dd>돈을 늦게 준 회사에 붙는 이자. 퇴직 후 14일이 지나면 연 20%가 붙어요.</dd></div>
+        <div><dt>내용증명</dt><dd>“언제, 누구에게, 무슨 내용을 보냈는지”를 우체국이 증명해 주는 편지. 강제력은 없지만 기록이 남아요.</dd></div>
+        <div><dt>진정</dt><dd>노동청에 “조사해서 밀린 돈을 받게 해 달라”고 요청하는 것. 수수료가 없어요.</dd></div>
+      </dl>
+    </details>
 
-        <div class="grid2">
-          <label class="field">
-            <span class="label">입사일</span>
-            <input type="date" id="hireDate" name="hireDate" required>
-          </label>
-          <label class="field">
-            <span class="label">퇴사일(예정일)</span>
-            <input type="date" id="quitDate" name="quitDate" required>
-          </label>
-        </div>
+    <section class="panel" id="input-panel" aria-labelledby="input-title">
+      <h2 class="section-title" id="input-title"><span class="step">입력</span> 내 근무 조건</h2>
+      <p class="panel-lede">아는 칸만 채워도 돼요. 모르는 칸은 비워 두면 기본값으로 계산해요.</p>
 
-        <label class="field">
-          <span class="label">월 급여 (세전, 단축 전 기준)</span>
-          <span class="input-wrap"><input type="text" id="monthlyPay" name="monthlyPay" inputmode="numeric" placeholder="예: 3,200,000" autocomplete="off"><span class="unit">원</span></span>
-          <span class="hint">기본급과 매달 고정으로 받는 수당을 더한 금액. 상여금·연장수당은 빼고 넣어 주세요. (통상임금 기준)</span>
-        </label>
+      <form id="calc-form" novalidate>
 
-        <div class="grid2">
-          <label class="field">
-            <span class="label">1일 소정근로시간 <em>단축 전</em></span>
-            <span class="input-wrap"><input type="text" id="dailyHours" name="dailyHours" inputmode="numeric" value="8" autocomplete="off"><span class="unit">시간</span></span>
-          </label>
-          <label class="field">
-            <span class="label">주 소정근로일수 <em>단축 전</em></span>
-            <span class="input-wrap"><input type="text" id="weekDays" name="weekDays" inputmode="numeric" value="5" autocomplete="off"><span class="unit">일</span></span>
-          </label>
-        </div>
+        <fieldset class="fset">
+          <legend>기본 정보</legend>
 
-        <label class="field">
-          <span class="label">퇴직급여 제도</span>
-          <select id="pensionType">
-            <option value="severance">퇴직금제도(퇴사 때 일시금)</option>
-            <option value="db">확정급여형(DB)</option>
-            <option value="dc">확정기여형(DC)</option>
-          </select>
-          <span class="hint">DC형은 퇴사 때 정산하는 제도가 아니라 매년 부담금을 넣는 제도예요. 계산 결과를 읽는 방법이 달라집니다.</span>
-        </label>
-
-        <details class="advanced">
-          <summary>퇴직 전 3개월 임금 총액을 알고 있다면 (선택)</summary>
-          <label class="field">
-            <span class="label">평균임금 산정기간의 임금 총액 (세전)</span>
-            <span class="input-wrap"><input type="text" id="threeMonthTotal" name="threeMonthTotal" inputmode="numeric" placeholder="모르면 비워 두세요" autocomplete="off"><span class="unit">원</span></span>
-            <span class="hint">임금명세서 합계. 3개월 안에 상여금·연차수당이 있으면 그 금액도 더해 주세요. 비워 두면 ‘월 급여 × 3개월’로 계산해요.</span>
-          </label>
-          <p class="hint block">퇴직 전 3개월에 육아휴직·단축기간이 들어 있으면, 그 기간을 뺀 직전 3개월이 산정기간이 됩니다. 계산 후 화면에 정확한 기간이 표시되니 그 기간의 총액을 넣어 주세요.</p>
-        </details>
-      </fieldset>
-
-      <fieldset class="fset">
-        <legend>육아휴직</legend>
-        <p class="fset-note">안 썼다면 비워 두세요</p>
-        <div id="leave-list">
-          <div class="period-row" data-index="0">
-            <div class="grid2">
-              <label class="field">
-                <span class="label">시작일</span>
-                <input type="date" id="leaveStart-0" class="leave-start" autocomplete="off">
-              </label>
-              <label class="field">
-                <span class="label">종료일</span>
-                <input type="date" id="leaveEnd-0" class="leave-end" autocomplete="off">
-              </label>
-            </div>
-            <p class="period-note" data-role="leave-length"></p>
+          <div class="grid2">
+            <label class="field">
+              <span class="label">입사일</span>
+              <input type="date" id="hireDate" name="hireDate" required>
+            </label>
+            <label class="field">
+              <span class="label">퇴사일(예정일)</span>
+              <input type="date" id="quitDate" name="quitDate" required>
+            </label>
           </div>
-        </div>
-        <button type="button" class="btn-ghost" id="add-leave">＋ 기간 추가 (분할 사용)</button>
-      </fieldset>
 
-      <fieldset class="fset">
-        <legend>육아기 근로시간 단축</legend>
-        <p class="fset-note">안 했다면 비워 두세요 · 시간 단축과 근로일수 단축 모두 입력할 수 있어요</p>
+          <label class="field">
+            <span class="label">월 급여 <em>세전, 단축 전 기준</em></span>
+            <span class="input-wrap"><input type="text" id="monthlyPay" name="monthlyPay" inputmode="numeric" placeholder="예: 3,200,000" autocomplete="off"><span class="unit">원</span></span>
+            <span class="hint"><b class="term">통상임금</b> 기준이에요. 매달 똑같이 나오는 기본급과 고정수당을 더한 금액. 상여금·연장수당은 빼 주세요.</span>
+          </label>
 
-        <div class="grid2">
-          <label class="field">
-            <span class="label">단축 시작일</span>
-            <input type="date" id="shiftStart" autocomplete="off">
-          </label>
-          <label class="field">
-            <span class="label">단축 종료일</span>
-            <input type="date" id="shiftEnd" autocomplete="off">
-          </label>
-        </div>
+          <div class="grid2">
+            <label class="field">
+              <span class="label">1일 근무시간 <em>단축 전</em></span>
+              <span class="input-wrap"><input type="text" id="dailyHours" name="dailyHours" inputmode="numeric" value="8" autocomplete="off"><span class="unit">시간</span></span>
+              <span class="hint"><b class="term">소정근로시간</b> = 회사와 정한 하루 근무시간.</span>
+            </label>
+            <label class="field">
+              <span class="label">주 근무일수 <em>단축 전</em></span>
+              <span class="input-wrap"><input type="text" id="weekDays" name="weekDays" inputmode="numeric" value="5" autocomplete="off"><span class="unit">일</span></span>
+              <span class="hint">일주일에 며칠 나가는지.</span>
+            </label>
+          </div>
 
-        <div class="grid2">
           <label class="field">
-            <span class="label">단축 후 1일 근로시간</span>
-            <span class="input-wrap"><input type="text" id="shiftHours" inputmode="numeric" placeholder="예: 6" autocomplete="off"><span class="unit">시간</span></span>
-            <span class="hint">비우면 단축 전과 같다고 봐요.</span>
-          </label>
-          <label class="field">
-            <span class="label">단축 후 주 근로일수</span>
-            <span class="input-wrap"><input type="text" id="shiftWeekDays" inputmode="numeric" placeholder="예: 5" autocomplete="off"><span class="unit">일</span></span>
-            <span class="hint">비우면 단축 전과 같다고 봐요.</span>
-          </label>
-        </div>
-
-        <label class="field">
-          <span class="label">단축 중 월 급여 (세전)</span>
-          <span class="input-wrap"><input type="text" id="shiftPay" inputmode="numeric" placeholder="예: 2,400,000" autocomplete="off"><span class="unit">원</span></span>
-          <span class="hint">단축 기간에 실제로 받은 월 급여. 급여명세서 기준으로 넣어 주세요.</span>
-        </label>
-
-        <div class="grid2">
-          <label class="field">
-            <span class="label">단축 중 초과근무 <em>합계</em></span>
-            <span class="input-wrap"><input type="text" id="extraHours" inputmode="numeric" placeholder="예: 24" autocomplete="off"><span class="unit">시간</span></span>
-            <span class="hint">단축된 시간을 넘겨 일한 시간의 합계</span>
-          </label>
-          <label class="field">
-            <span class="label">그 초과근무로 받은 수당</span>
-            <span class="input-wrap"><input type="text" id="extraPaid" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
-          </label>
-        </div>
-      </fieldset>
-
-      <fieldset class="fset">
-        <legend>연차휴가</legend>
-
-        <div class="grid2">
-          <label class="field">
-            <span class="label">최근 1년 발생 연차</span>
-            <span class="input-wrap"><input type="text" id="annualDays" inputmode="numeric" placeholder="자동 계산" autocomplete="off"><span class="unit">일</span></span>
-            <span class="hint" id="annual-hint">입사일을 넣으면 자동으로 채워요. 직접 고쳐도 됩니다.</span>
-          </label>
-          <label class="field">
-            <span class="label">사용한 연차</span>
-            <span class="input-wrap"><input type="text" id="annualUsed" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">일</span></span>
-          </label>
-        </div>
-        <p class="hint block">이전 해에 쓰지 못해 남아 있는 연차가 있다면, 발생 연차에 더해서 입력해 주세요. (상시 5인 이상 사업장 기준)</p>
-      </fieldset>
-
-      <fieldset class="fset">
-        <legend>실업급여</legend>
-        <p class="fset-note">모르면 기본값으로 계산해요 · 선택 입력</p>
-
-        <div class="grid2">
-          <label class="field">
-            <span class="label">이직일 당시 만 나이</span>
-            <span class="input-wrap"><input type="text" id="uiAge" inputmode="numeric" placeholder="예: 34" autocomplete="off"><span class="unit">세</span></span>
-          </label>
-          <label class="field">
-            <span class="label">고용보험 가입기간</span>
-            <select id="uiInsured">
-              <option value="">선택</option>
-              <option value="0">1년 미만</option>
-              <option value="1">1년 이상 ~ 3년 미만</option>
-              <option value="2">3년 이상 ~ 5년 미만</option>
-              <option value="3">5년 이상 ~ 10년 미만</option>
-              <option value="4">10년 이상</option>
+            <span class="label">퇴직급여 제도</span>
+            <select id="pensionType">
+              <option value="severance">퇴직금제도(퇴사 때 한꺼번에)</option>
+              <option value="db">확정급여형(DB)</option>
+              <option value="dc">확정기여형(DC)</option>
             </select>
+            <span class="hint">DC형은 퇴사 때 정산하는 게 아니라 회사가 매년 부담금을 넣는 제도예요. 결과를 읽는 방법이 달라져요.</span>
           </label>
+
+          <details class="advanced">
+            <summary>퇴직 전 3개월 임금 총액을 알고 있다면 (선택)</summary>
+            <label class="field">
+              <span class="label">평균임금 산정기간의 임금 총액 <em>세전</em></span>
+              <span class="input-wrap"><input type="text" id="threeMonthTotal" name="threeMonthTotal" inputmode="numeric" placeholder="모르면 비워 두세요" autocomplete="off"><span class="unit">원</span></span>
+              <span class="hint">급여명세서 합계예요. 그 3개월에 상여금·연차수당이 있으면 그 금액도 더해 주세요. 비우면 ‘월 급여 × 3개월’로 계산해요.</span>
+            </label>
+            <p class="hint block">퇴직 전 3개월에 육아휴직·단축기간이 들어 있으면 <b class="term">산정제외</b>라서, 그 기간을 뺀 직전 3개월로 계산해요. 계산 후 화면에 정확한 기간이 나오니 그 기간의 금액을 넣어 주세요.</p>
+          </details>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend>육아휴직</legend>
+          <p class="fset-note">안 썼다면 비워 두세요</p>
+          <div id="leave-list">
+            <div class="period-row" data-index="0">
+              <div class="grid2">
+                <label class="field">
+                  <span class="label">시작일</span>
+                  <input type="date" id="leaveStart-0" class="leave-start" autocomplete="off">
+                </label>
+                <label class="field">
+                  <span class="label">종료일</span>
+                  <input type="date" id="leaveEnd-0" class="leave-end" autocomplete="off">
+                </label>
+              </div>
+              <p class="period-note" data-role="leave-length"></p>
+            </div>
+          </div>
+          <button type="button" class="btn-ghost" id="add-leave">＋ 기간 추가 (나눠 쓴 경우)</button>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend>육아기 근로시간 단축</legend>
+          <p class="fset-note">안 했다면 비워 두세요 · 시간을 줄인 경우와 근무일수를 줄인 경우 모두 적을 수 있어요</p>
+
+          <div class="grid2">
+            <label class="field">
+              <span class="label">단축 시작일</span>
+              <input type="date" id="shiftStart" autocomplete="off">
+            </label>
+            <label class="field">
+              <span class="label">단축 종료일</span>
+              <input type="date" id="shiftEnd" autocomplete="off">
+            </label>
+          </div>
+
+          <div class="grid2">
+            <label class="field">
+              <span class="label">단축 후 1일 근무시간</span>
+              <span class="input-wrap"><input type="text" id="shiftHours" inputmode="numeric" placeholder="예: 6" autocomplete="off"><span class="unit">시간</span></span>
+              <span class="hint">비우면 단축 전과 같다고 봐요.</span>
+            </label>
+            <label class="field">
+              <span class="label">단축 후 주 근무일수</span>
+              <span class="input-wrap"><input type="text" id="shiftWeekDays" inputmode="numeric" placeholder="예: 5" autocomplete="off"><span class="unit">일</span></span>
+              <span class="hint">비우면 단축 전과 같다고 봐요.</span>
+            </label>
+          </div>
+
+          <label class="field">
+            <span class="label">단축 중 월 급여 <em>세전</em></span>
+            <span class="input-wrap"><input type="text" id="shiftPay" inputmode="numeric" placeholder="예: 2,400,000" autocomplete="off"><span class="unit">원</span></span>
+            <span class="hint">단축 기간에 실제로 받은 월급이에요. 급여명세서 그대로 적어 주세요.</span>
+          </label>
+
+          <div class="grid2">
+            <label class="field">
+              <span class="label">단축 중 초과근무 <em>합계</em></span>
+              <span class="input-wrap"><input type="text" id="extraHours" inputmode="numeric" placeholder="예: 24" autocomplete="off"><span class="unit">시간</span></span>
+              <span class="hint">줄어든 시간을 넘겨 일한 시간의 합계</span>
+            </label>
+            <label class="field">
+              <span class="label">그 초과근무로 받은 수당</span>
+              <span class="input-wrap"><input type="text" id="extraPaid" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">원</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend>연차휴가</legend>
+
+          <div class="grid2">
+            <label class="field">
+              <span class="label">최근 1년 발생 연차</span>
+              <span class="input-wrap"><input type="text" id="annualDays" inputmode="numeric" placeholder="자동 계산" autocomplete="off"><span class="unit">일</span></span>
+              <span class="hint" id="annual-hint">입사일을 넣으면 자동으로 채워요. 직접 고쳐도 됩니다.</span>
+            </label>
+            <label class="field">
+              <span class="label">사용한 연차</span>
+              <span class="input-wrap"><input type="text" id="annualUsed" inputmode="numeric" placeholder="0" autocomplete="off"><span class="unit">일</span></span>
+            </label>
+          </div>
+          <p class="hint block">작년에 못 써서 남은 연차가 있으면 발생 연차에 더해서 적어 주세요. (상시 5인 이상 사업장 기준)</p>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend>실업급여</legend>
+          <p class="fset-note">모르면 기본값으로 계산해요 · 선택 입력</p>
+
+          <div class="grid2">
+            <label class="field">
+              <span class="label">이직일 당시 만 나이</span>
+              <span class="input-wrap"><input type="text" id="uiAge" inputmode="numeric" placeholder="예: 34" autocomplete="off"><span class="unit">세</span></span>
+            </label>
+            <label class="field">
+              <span class="label">고용보험 가입기간</span>
+              <select id="uiInsured">
+                <option value="">선택</option>
+                <option value="0">1년 미만</option>
+                <option value="1">1년 이상 ~ 3년 미만</option>
+                <option value="2">3년 이상 ~ 5년 미만</option>
+                <option value="3">5년 이상 ~ 10년 미만</option>
+                <option value="4">10년 이상</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid2">
+            <label class="field">
+              <span class="label">소정급여일수</span>
+              <span class="input-wrap"><input type="text" id="uiBenefitDays" inputmode="numeric" value="150" autocomplete="off"><span class="unit">일</span></span>
+              <span class="hint" id="ui-days-hint">나이와 가입기간을 넣으면 자동으로 맞춰 드려요.</span>
+            </label>
+            <label class="field">
+              <span class="label">회사가 신고한 월 급여</span>
+              <span class="input-wrap"><input type="text" id="uiReportedPay" inputmode="numeric" placeholder="자동" autocomplete="off"><span class="unit">원</span></span>
+              <span class="hint">이직확인서에 적힌 금액 · 비우면 단축 급여로 계산</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fset">
+          <legend>이직확인서에 적힌 내용</legend>
+          <p class="fset-note">사본이 있으면 그대로 옮겨 적어 주세요 · 비워 두면 점검 없이 계산만 해요</p>
+
+          <div class="grid2">
+            <label class="field">
+              <span class="label">이직확인서상 1일 근무시간</span>
+              <span class="input-wrap"><input type="text" id="docDailyHours" inputmode="numeric" placeholder="예: 6" autocomplete="off"><span class="unit">시간</span></span>
+              <span class="hint">비우면 단축 후 시간(없으면 단축 전)으로 봐요.</span>
+            </label>
+            <label class="field">
+              <span class="label">이직확인서상 피보험단위기간</span>
+              <span class="input-wrap"><input type="text" id="docInsuredDays" inputmode="numeric" placeholder="예: 900" autocomplete="off"><span class="unit">일</span></span>
+            </label>
+          </div>
+
+          <label class="field">
+            <span class="label">이직확인서상 1일 평균임금 <em>선택</em></span>
+            <span class="input-wrap"><input type="text" id="docAvgDaily" inputmode="numeric" placeholder="예: 106,667" autocomplete="off"><span class="unit">원</span></span>
+            <span class="hint">적혀 있다면 넣어 주세요. 비우면 위의 월 급여로 계산한 값과 비교해요.</span>
+          </label>
+
+          <div class="grid2">
+            <label class="field">
+              <span class="label">이직확인서에 적힌 이직사유</span>
+              <select id="docReason">
+                <option value="">모르거나 해당 없음</option>
+                <option value="11">11 · 개인사정으로 인한 자진퇴사</option>
+                <option value="12">12 · 사업장 이전·근로조건 변동·임금체불 등으로 자진퇴사</option>
+                <option value="22">22 · 폐업·도산(예정 포함), 공사 중단</option>
+                <option value="23">23 · 경영상 필요·회사불황으로 인한 인원감축(해고·권고사직 포함)</option>
+                <option value="26">26 · 근로자 귀책사유에 의한 징계해고·권고사직</option>
+                <option value="31">31 · 정년</option>
+                <option value="32">32 · 계약기간 만료, 공사 종료</option>
+                <option value="41">41 · 고용보험 비적용</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="label">실제 퇴사 경위</span>
+              <select id="myReason">
+                <option value="">선택</option>
+                <option value="11">11 · 내가 개인 사정으로 그만둠</option>
+                <option value="12">12 · 근로조건 변동·임금체불 등으로 그만둠</option>
+                <option value="22">22 · 회사 폐업·도산</option>
+                <option value="23">23 · 권고사직·경영상 인원감축</option>
+                <option value="26">26 · 내 귀책사유로 징계해고·권고사직</option>
+                <option value="31">31 · 정년</option>
+                <option value="32">32 · 계약기간 만료</option>
+              </select>
+            </label>
+          </div>
+          <p class="hint block">코드 번호는 고용보험 상실신고·이직확인서의 구분코드예요. 사본의 ‘이직사유’ 칸에 적힌 글자와 코드를 함께 확인해 주세요.</p>
+        </fieldset>
+
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" id="calc-submit">정산액 계산하기</button>
+          <button type="button" class="btn-ghost" id="fill-example">예시 값으로 먼저 둘러보기</button>
         </div>
+        <p class="privacy">입력한 값은 이 브라우저 안에서만 계산되고, 어디로도 보내지 않아요.</p>
+      </form>
+    </section>
 
-        <div class="grid2">
-          <label class="field">
-            <span class="label">소정급여일수</span>
-            <span class="input-wrap"><input type="text" id="uiBenefitDays" inputmode="numeric" value="150" autocomplete="off"><span class="unit">일</span></span>
-            <span class="hint" id="ui-days-hint">나이와 가입기간을 넣으면 자동으로 맞춰 드려요.</span>
-          </label>
-          <label class="field">
-            <span class="label">회사가 신고한 월 급여</span>
-            <span class="input-wrap"><input type="text" id="uiReportedPay" inputmode="numeric" placeholder="자동" autocomplete="off"><span class="unit">원</span></span>
-            <span class="hint">이직확인서에 적힌 금액 · 비우면 단축 급여로 계산</span>
-          </label>
+    <section class="panel results" id="result-panel" aria-labelledby="result-title" hidden>
+      <h2 class="section-title" id="result-title" tabindex="-1"><span class="step">결과</span> 예상 정산 내역</h2>
+
+      <div id="warnings" class="warnings" aria-live="polite"></div>
+      <div id="summary-line" class="summary-line"></div>
+      <p class="basis-line" id="basis-line"></p>
+
+      <div id="cards"></div>
+
+      <div class="total" id="total-block">
+        <div class="total-head">
+          <span class="total-label">최대 예상 청구액</span>
+          <span class="total-sub" id="total-sub"></span>
         </div>
-      </fieldset>
-
-      <fieldset class="fset">
-        <legend>이직확인서에 적힌 내용</legend>
-        <p class="fset-note">사본이 있으면 그대로 옮겨 적어 주세요 · 비워 두면 점검 없이 계산만 해요</p>
-
-        <div class="grid2">
-          <label class="field">
-            <span class="label">이직확인서상 1일 소정근로시간</span>
-            <span class="input-wrap"><input type="text" id="docDailyHours" inputmode="numeric" placeholder="예: 6" autocomplete="off"><span class="unit">시간</span></span>
-            <span class="hint">비우면 단축 후 시간(없으면 단축 전)으로 봐요.</span>
-          </label>
-          <label class="field">
-            <span class="label">이직확인서상 피보험단위기간</span>
-            <span class="input-wrap"><input type="text" id="docInsuredDays" inputmode="numeric" placeholder="예: 900" autocomplete="off"><span class="unit">일</span></span>
-          </label>
+        <p class="total-amount" id="total-amount">0원</p>
+        <ul class="total-list" id="total-list"></ul>
+        <div class="total-actions">
+          <button type="button" class="btn-primary small" id="copy-result">결과 복사</button>
+          <button type="button" class="btn-ghost small" id="print-result">인쇄 · PDF 저장</button>
         </div>
+        <p class="total-note" id="copy-status" role="status"></p>
+      </div>
 
-        <label class="field">
-          <span class="label">이직확인서상 1일 평균임금 <em>선택</em></span>
-          <span class="input-wrap"><input type="text" id="docAvgDaily" inputmode="numeric" placeholder="예: 106,667" autocomplete="off"><span class="unit">원</span></span>
-          <span class="hint">적혀 있다면 넣어 주세요. 비우면 위의 월 급여로 계산한 값을 기준으로 비교해요.</span>
-        </label>
+      <p class="estimate-note">
+        회사가 이 항목을 하나도 주지 않았다고 가정한 <strong>최대 추정액</strong>이에요. 이미 받은 항목은 체크를 풀어 주세요.
+        실제 금액은 회사 규정·상여금·근무기록에 따라 달라지고, 청구할 때는 계산 근거 자료를 함께 내야 해요.
+      </p>
 
-        <div class="grid2">
-          <label class="field">
-            <span class="label">이직확인서에 적힌 이직사유</span>
-            <select id="docReason">
-              <option value="">모르거나 해당 없음</option>
-              <option value="11">11 · 개인사정으로 인한 자진퇴사</option>
-              <option value="12">12 · 사업장 이전·근로조건 변동·임금체불 등으로 자진퇴사</option>
-              <option value="22">22 · 폐업·도산(예정 포함), 공사 중단</option>
-              <option value="23">23 · 경영상 필요·회사불황으로 인한 인원감축(해고·권고사직 포함)</option>
-              <option value="26">26 · 근로자 귀책사유에 의한 징계해고·권고사직</option>
-              <option value="31">31 · 정년</option>
-              <option value="32">32 · 계약기간 만료, 공사 종료</option>
-              <option value="41">41 · 고용보험 비적용</option>
-            </select>
-          </label>
-          <label class="field">
-            <span class="label">실제 퇴사 경위</span>
-            <select id="myReason">
-              <option value="">선택</option>
-              <option value="11">11 · 내가 개인 사정으로 그만둠</option>
-              <option value="12">12 · 근로조건 변동·임금체불 등으로 그만둠</option>
-              <option value="22">22 · 회사 폐업·도산</option>
-              <option value="23">23 · 권고사직·경영상 인원감축</option>
-              <option value="26">26 · 내 귀책사유로 징계해고·권고사직</option>
-              <option value="31">31 · 정년</option>
-              <option value="32">32 · 계약기간 만료</option>
-            </select>
-          </label>
+      <div class="next-card">
+        <p class="next-title">계산이 이상하거나 회사가 안 줄 때는?</p>
+        <p class="next-body">위쪽 <strong>‘안 줄 때’</strong> 탭에서 상황별 순서를, <strong>‘이직확인서’</strong> 탭에서 4칸 점검과 신고처를 볼 수 있어요.</p>
+        <button type="button" class="btn-ghost small" data-goto="tab-help">대처법 보기</button>
+      </div>
+    </section>
+
+  </section>
+
+  <!-- ══════════════ 탭 2 · 안 줄 때 대처법 ══════════════ -->
+  <section id="panel-help" class="tabpanel" role="tabpanel" aria-labelledby="tab-help" tabindex="0" hidden>
+
+    <section class="panel">
+      <h2 class="section-title"><span class="step sage">순서</span> 회사가 안 지켜줄 때</h2>
+      <p class="panel-lede">“나중에 주겠다”는 말만 반복된다면, 감정보다 <strong>순서</strong>가 중요해요. 아래 세 단계만 기억하세요.</p>
+
+      <ol class="flow">
+        <li class="flow-item">
+          <span class="flow-no">1</span>
+          <div class="flow-body">
+            <h3>오늘, 기록부터 남겨요</h3>
+            <p>급여명세서·통장 내역·근무표·단축 합의서를 사진으로 찍어 두세요. 회사와 주고받은 문자·메신저도 지우지 마세요. 퇴사하면 회사 시스템에 못 들어갈 수 있어요.</p>
+          </div>
+        </li>
+        <li class="flow-item">
+          <span class="flow-no">2</span>
+          <div class="flow-body">
+            <h3>며칠 안에, 글로 요구해요</h3>
+            <p>전화로만 말하지 말고 문자·메일·내용증명으로 <strong>금액과 기한</strong>을 적어 요청하세요. “6월분 250만 원, 7월분 250만 원, 합계 500만 원을 12월 10일까지”처럼요.</p>
+          </div>
+        </li>
+        <li class="flow-item">
+          <span class="flow-no">3</span>
+          <div class="flow-body">
+            <h3>그래도 안 되면, 기관에 맡겨요</h3>
+            <p>노동포털에 <strong>임금체불 진정</strong>을 내거나, 이직확인서·피보험자격 문제는 <strong>고용센터·근로복지공단</strong>에 확인을 청구하세요. 진정은 무료예요.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title"><span class="step coral">증거</span> 미리 챙겨 둘 것</h2>
+      <p class="panel-lede">다 없어도 괜찮아요. 있는 것부터 모으면 돼요. 챙긴 것만 눌러 보세요.</p>
+
+      <ul class="evidence">
+        <li><label><input type="checkbox" class="ev"> 근로계약서, 육아기 근로시간 단축 합의서(서면)</label></li>
+        <li><label><input type="checkbox" class="ev"> 임금명세서 또는 급여 명세 (최근 3년)</label></li>
+        <li><label><input type="checkbox" class="ev"> 급여가 들어온 통장 내역</label></li>
+        <li><label><input type="checkbox" class="ev"> 출퇴근 기록, 근무표, 업무 메신저·메일</label></li>
+        <li><label><input type="checkbox" class="ev"> 육아휴직 확인서, 단축 확인서</label></li>
+        <li><label><input type="checkbox" class="ev"> 연차 발생·사용 대장</label></li>
+        <li><label><input type="checkbox" class="ev"> 이직확인서 사본 (고용24에서 확인 가능)</label></li>
+        <li><label><input type="checkbox" class="ev"> 퇴사일을 알 수 있는 서류 (사직서, 상실신고 내역)</label></li>
+        <li><label><input type="checkbox" class="ev"> “나중에 주겠다”는 문자·녹음, 합의서 사본</label></li>
+      </ul>
+      <p class="evidence-count" id="evidence-count">0 / 9 챙겼어요</p>
+      <p class="hint block">통화 녹음은 내가 직접 한 통화라면 법에 어긋나지 않아요. 대화는 되도록 문자·메신저처럼 기록이 남는 쪽으로 해 보세요.</p>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title"><span class="step">상황</span> 내 경우엔 이렇게</h2>
+      <p class="panel-lede">자주 나오는 상황 8가지를 순서대로 정리했어요. 내 상황을 눌러 펼쳐 보세요.</p>
+
+      <div class="situations">
+
+        <details class="situation">
+          <summary><span class="sit-ico">1</span> 퇴직금·연차수당을 안 줘요</summary>
+          <div class="sit-body">
+            <ol class="mini-steps">
+              <li><strong>금액을 표로 정리하세요.</strong> 항목·기간·금액·계산 근거를 한 장으로 만들면 조사가 빨라져요.</li>
+              <li><strong>문자나 내용증명으로 기한을 정해 요구하세요.</strong> 퇴직 후 14일이 지나면 그다음 날부터 연 20% 지연이자가 붙어요.</li>
+              <li><strong>노동포털에서 임금체불 진정</strong>을 내세요. 사업장 소재지 관할 고용노동관서가 조사하고, 확인되면 지급 지시가 나가요.</li>
+            </ol>
+            <p class="sit-note">청구할 수 있는 기간은 3년이에요. 지나면 청구권이 사라지니 미루지 마세요.</p>
+            <p class="law-line">근로기준법 제36조 · 제37조 · 제49조</p>
+          </div>
+        </details>
+
+        <details class="situation">
+          <summary><span class="sit-ico">2</span> 이직확인서가 ‘자진퇴사(11)’로 되어 있어요</summary>
+          <div class="sit-body">
+            <p class="sit-lead">권고사직이었는데 11번으로 신고되면 실업급여가 막혀요. 코드는 ‘서류에 뭐라고 썼는지’가 아니라 <strong>실제 퇴사 경위</strong>로 정해져요.</p>
+            <ol class="mini-steps">
+              <li>고용24에서 이직확인서 처리 내용을 확인하고 화면을 캡처해 두세요.</li>
+              <li>회사에 <strong>서면(메일·내용증명)</strong>으로 정정을 요청하고, 요청한 날짜를 남기세요.</li>
+              <li>회사가 응하지 않으면 <strong>관할 고용센터</strong>에 퇴직 경위서와 자료를 내고 소명하세요.</li>
+              <li>그래도 다르면 <strong>근로복지공단에 피보험자격 확인청구</strong>(1588-0075)를 하세요.</li>
+            </ol>
+            <p class="sit-note">사직서에 ‘개인사정’이라고 썼더라도, 권고를 받은 문자·회의 기록·인원감축 공지가 있으면 다퉈 볼 수 있어요.</p>
+            <p class="law-line">고용보험법 제17조(피보험자격 확인) · 제87조(심사청구, 90일 이내)</p>
+          </div>
+        </details>
+
+        <details class="situation">
+          <summary><span class="sit-ico">3</span> 단축 후 급여로 퇴직금을 계산한 것 같아요</summary>
+          <div class="sit-body">
+            <p class="sit-lead">육아기 단축기간은 <strong>평균임금 계산에서 빼는 기간</strong>이에요. 단축 전 3개월 임금으로 계산하는 게 원칙이에요.</p>
+            <ol class="mini-steps">
+              <li>회사에 퇴직금 계산내역(산정 기간·평균임금)을 요청하세요.</li>
+              <li>산정 기간에 단축기간이 들어가 있으면 그 부분을 짚어 정정을 요청하세요.</li>
+              <li>차액이 확인되면 진정으로 청구하세요. 이 계산기 ③번 카드가 차액을 보여줘요.</li>
+            </ol>
+            <p class="sit-note">단축이 끝난 뒤 바로 퇴사해도, 통상임금은 원래 계약의 근무시간을 기준으로 봐요(고용노동부 답변, 2024.8.7).</p>
+            <p class="law-line">남녀고용평등법 제19조의3 제4항</p>
+          </div>
+        </details>
+
+        <details class="situation">
+          <summary><span class="sit-ico">4</span> 실업급여가 예상보다 적어요</summary>
+          <div class="sit-body">
+            <p class="sit-lead">하한액은 ‘이직 전 1일 소정근로시간’에 따라 달라져요. 2026년 기준 8시간이면 66,048원, 6시간이면 49,536원이에요.</p>
+            <ol class="mini-steps">
+              <li>이직확인서의 ‘1일 소정근로시간’ 칸을 사진으로 남기세요.</li>
+              <li>계약상 시간과 다르면 회사에 정정을 요청하세요.</li>
+              <li>단축 전 시간으로 인정되는지는 실무가 갈려요. 계산기 ⑤번 카드의 두 금액을 들고 <strong>관할 고용센터</strong>에 물어보세요.</li>
+            </ol>
+            <p class="law-line">고용보험법 제45조 제4항 · 시행규칙 제91조의2</p>
+          </div>
+        </details>
+
+        <details class="situation">
+          <summary><span class="sit-ico">5</span> “사정이 어려워 나중에 주겠다”고만 해요</summary>
+          <div class="sit-body">
+            <p class="sit-lead">내가 동의한 합의가 없다면, 회사 사정만으로 지급 기한이 늘어나지 않아요. 일방적으로 미루는 것도 체불이에요.</p>
+            <ol class="mini-steps">
+              <li>“언제까지, 얼마를” 문자로 확정하세요. 막연한 약속은 기록이 안 돼요.</li>
+              <li>기한을 넘기면 내용증명을 보내고, 그다음 날 진정을 검토하세요.</li>
+              <li>회사가 돈이 없다면 <strong>간이대지급금</strong>을 함께 알아보세요. 진정 기한이 따로 있어요.</li>
+            </ol>
+            <p class="sit-note">기다리는 동안에도 증거 수집은 계속하세요. 시간이 지나면 자료가 사라지고 회사 자금 사정도 나빠져요.</p>
+          </div>
+        </details>
+
+        <details class="situation">
+          <summary><span class="sit-ico">6</span> 합의서·사직서에 서명하라고 해요</summary>
+          <div class="sit-body">
+            <p class="sit-lead">돈을 다 받기 전에 “모든 임금을 지급받았고, 향후 이의를 제기하지 않는다”는 문구에 서명하면 나중에 청구가 어려워져요.</p>
+            <ol class="mini-steps">
+              <li>서명 전에 금액을 내역과 하나씩 대조하세요.</li>
+              <li>일부만 받는다면 “일부 지급”이라고 적고, 남은 금액 청구권은 포기하지 않는다는 문구를 넣으세요.</li>
+              <li>분할로 받기로 했다면 “기한을 어기면 남은 금액을 한꺼번에 지급한다”는 조항을 넣으세요.</li>
+            </ol>
+            <p class="sit-note">서명하기 전 사진으로 남겨 두면, 나중에 내용을 확인할 수 있어요.</p>
+          </div>
+        </details>
+
+        <details class="situation">
+          <summary><span class="sit-ico">7</span> 육아휴직·단축을 이유로 불리하게 대해요</summary>
+          <div class="sit-body">
+            <p class="sit-lead">육아휴직이나 단축을 썼다는 이유로 해고·강등·평가 불이익을 주는 것은 법으로 금지돼 있어요.</p>
+            <ol class="mini-steps">
+              <li>인사발령·평가·업무 배치가 달라진 시점과 내용을 날짜순으로 적어 두세요.</li>
+              <li>퇴사를 종용받았다면 그 대화를 문자·메신저로 남기고, 가능하면 녹음하세요.</li>
+              <li>관할 고용노동지청에 진정하거나, 지역 <strong>직장맘지원센터</strong>의 무료 노무 상담을 받아 보세요.</li>
+            </ol>
+            <p class="law-line">남녀고용평등법 제19조 제4항 · 제19조의3 제1항</p>
+          </div>
+        </details>
+
+        <details class="situation">
+          <summary><span class="sit-ico">8</span> 회사가 폐업했거나 돈이 없대요</summary>
+          <div class="sit-body">
+            <p class="sit-lead">회사 대신 나라가 먼저 주는 <strong>간이대지급금</strong> 제도가 있어요. 다만 기한이 세 개라 순서를 지켜야 해요.</p>
+            <ol class="mini-steps">
+              <li>퇴직한 날의 <strong>다음 날부터 1년 안에</strong> 임금체불 진정을 내세요.</li>
+              <li>진정 뒤 받은 <strong>‘체불 임금등·사업주 확인서’가 처음 나온 날부터 6개월 안에</strong> 근로복지공단에 청구하세요.</li>
+              <li>한도는 임금 700만 원 + 퇴직급여 700만 원, 합계 1,000만 원까지예요.</li>
+            </ol>
+            <p class="sit-note">회사가 퇴직일까지 6개월 이상 사업을 했어야 하는 조건도 있어요. 청구 전에 1588-0075로 확인하세요.</p>
+            <p class="law-line">임금채권보장법 제7조 · 시행령 제7조·제8조·제9조</p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title"><span class="step warm">요구</span> 문자로 보낼 문장 예시</h2>
+      <p class="panel-lede">그대로 보내도 되고, 금액과 날짜만 바꿔 쓰세요. 감정적인 말은 빼는 게 좋아요.</p>
+      <div class="template-box">
+        <p class="template-text" id="template-text">안녕하세요, ○○○입니다.
+2025년 3월 2일부터 2026년 9월 30일까지 근무하고 퇴사했습니다.
+퇴직금과 미사용 연차수당 합계 ○○원을 아직 받지 못했습니다.
+2026년 12월 10일까지 아래 계좌로 지급해 주시기 바랍니다.
+기한까지 지급되지 않으면 관할 고용노동관서에 진정을 제기하겠습니다.
+계좌: ○은행 ○○○-○○○-○○○○○○</p>
+        <button type="button" class="btn-ghost small" id="copy-template">문장 복사</button>
+        <p class="copy-status" id="template-status" role="status"></p>
+      </div>
+      <p class="hint block">더 힘을 실어야 할 때는 우체국(epost.go.kr)에서 <b class="term">내용증명</b>으로 보내세요. 배달증명을 함께 넣으면 언제 도착했는지도 남아요.</p>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title"><span class="step">숫자</span> 알아 두면 힘이 되는 기준</h2>
+      <div class="facts">
+        <p><strong>퇴직 후 14일</strong> 안에 임금·퇴직금을 줘야 해요. 지나면 <strong>연 20% 지연이자</strong>를 청구할 수 있어요. <span class="law">근로기준법 제36조·제37조</span></p>
+        <p><strong>임금 청구권은 3년</strong>이에요. 급여 지급일부터 3년이 지나면 청구할 수 없어요. <span class="law">근로기준법 제49조</span></p>
+        <p><strong>2026년 10월 8일부터</strong> 임금·수당 체불은 <strong>5년 이하 징역 또는 5천만 원 이하 벌금</strong>이에요. <span class="law">근로기준법 제107조</span></p>
+        <p><strong>퇴직금 체불은 별도 법률</strong>이에요. <strong>2026년 9월 18일부터</strong> 5년 이하 징역 또는 5천만 원 이하 벌금이고, 조문도 제43조로 옮겨졌어요. <span class="law">근로자퇴직급여 보장법 제43조</span></p>
+        <p>진정은 <strong>수수료가 없고</strong>, 처리 기간은 원칙적으로 <strong>25일</strong>(토요일·공휴일 제외)이에요. 사안에 따라 늘어날 수 있어요.</p>
+      </div>
+    </section>
+
+  </section>
+
+  <!-- ══════════════ 탭 3 · 고충 Q&A ══════════════ -->
+  <section id="panel-qa" class="tabpanel" role="tabpanel" aria-labelledby="tab-qa" tabindex="0" hidden>
+
+    <section class="panel">
+      <h2 class="section-title"><span class="step coral">Q&amp;A</span> 사람들이 많이 막히는 곳</h2>
+      <p class="panel-lede">실제 상담·판례·고용노동부 답변에서 자주 나오는 순서로 10개를 골랐어요. 내 상황과 비슷한 질문을 눌러 보세요.</p>
+
+      <div class="qa-list">
+
+        <details class="qa">
+          <summary><span class="q">Q1</span> 육아휴직 쓰고 복직 2주 만에 그만뒀는데, “휴직했으니 연차 없다”고 해요.</summary>
+          <div class="qa-body">
+            <p>2018년 5월 29일 이후에 시작한 육아휴직 기간은 <strong>연차 계산에서 ‘출근한 날’로 봐요</strong>. 휴직했다고 연차가 사라지지 않아요.</p>
+            <p>실제로 육아휴직 후 퇴사한 직원의 연차수당 157만 원을 주지 않은 회사 대표가 벌금 100만 원을 선고받은 사례가 있어요(수원지법 안양지원, 2026년 4월 보도). 법원은 “육아휴직 기간을 출근으로 봐야 한다”고 판단했어요.</p>
+            <ul class="qa-list-ul">
+              <li>먼저 ‘계산하기’ 탭에서 미사용 연차수당이 얼마인지 확인하세요.</li>
+              <li>급여명세서와 연차 사용 내역을 챙기고, 문자로 지급을 요청하세요.</li>
+              <li>퇴직 후 14일이 지나도 안 주면 노동포털에 진정을 내세요.</li>
+            </ul>
+            <p class="law-line">근로기준법 제60조 제6항 제3호</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q2</span> 단축근무 중에 퇴사했는데, 퇴직금이 단축 후 월급으로 계산된 것 같아요.</summary>
+          <div class="qa-body">
+            <p>육아기 근로시간 단축기간은 <strong>평균임금 산정기간에서 빼요</strong>. 그래서 단축 전 3개월 임금으로 퇴직금을 계산하는 게 원칙이에요.</p>
+            <p>단축이 끝나자마자 퇴사해도 통상임금은 원래 계약의 근무시간을 기준으로 봐요(고용노동부 답변, 2024.8.7). 이 부분을 놓치는 회사가 많아요.</p>
+            <ul class="qa-list-ul">
+              <li>회사에 퇴직금 계산내역(산정 기간, 평균임금)을 요청하세요.</li>
+              <li>산정 기간에 단축기간이 들어 있으면 근거를 들어 정정을 요청하세요.</li>
+              <li>차액이 크면 진정으로 청구하세요. 3년 안에 하면 돼요.</li>
+            </ul>
+            <p class="law-line">남녀고용평등법 제19조의3 제4항 · 근로기준법 제2조</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q3</span> 권고사직이었는데 이직확인서에 11번(자진퇴사)으로 되어 있어요.</summary>
+          <div class="qa-body">
+            <p>이직사유는 서류에 적힌 글자가 아니라 <strong>실제로 어떤 일이 있었는지</strong>로 판단해요. 사직서에 ‘개인사정’이라고 썼더라도, 회사가 먼저 나가라고 한 정황이 있으면 다퉈 볼 수 있어요.</p>
+            <p>고용보험심사위원회에서도 사업장 사정과 사용자의 권유를 종합해 “자진 이직으로 보기 어렵다”며 수급자격 불인정 처분을 취소한 사례가 있어요(2023재결 제44호).</p>
+            <ul class="qa-list-ul">
+              <li>고용24에서 이직확인서 내용을 캡처해 두세요.</li>
+              <li>회사에 서면으로 정정 요청 → 고용센터 소명 → 근로복지공단 확인청구 순서로 가세요.</li>
+              <li>수급자격이 불인정되면 결정서를 받은 날부터 90일 안에 심사청구를 할 수 있어요.</li>
+            </ul>
+            <p class="law-line">고용보험법 제17조 · 제87조</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q4</span> 단축해서 6시간인데, 실업급여가 8시간 기준보다 적어요.</summary>
+          <div class="qa-body">
+            <p>실업급여 하한액은 <strong>이직 전 1일 소정근로시간</strong>에 최저임금의 80%를 곱해서 정해요. 2026년 기준으로 8시간이면 66,048원, 6시간이면 49,536원이에요.</p>
+            <p>그래서 이직확인서에 6시간으로 적히면 하한도 6시간 기준이 돼요. 다만 단축근무자가 불이익을 받지 않도록 <strong>단축 전 시간</strong>을 봐야 한다는 해석도 있어서, 실무가 갈리는 지점이에요.</p>
+            <ul class="qa-list-ul">
+              <li>계산기 ⑤번 카드에서 ‘신고된 대로’와 ‘단축 전 기준’ 두 금액을 나란히 확인하세요.</li>
+              <li>그 두 숫자를 들고 관할 고용센터 수급자격 담당자에게 물어보세요.</li>
+              <li>확인서의 시간이 계약과 다르면 회사에 정정을 요청하세요.</li>
+            </ul>
+            <p class="law-line">고용보험법 제45조 제4항 · 시행규칙 제91조의2</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q5</span> 회사가 “경영이 어려워 나중에 주겠다”고만 해요. 기다려야 하나요?</summary>
+          <div class="qa-body">
+            <p>기다릴 필요는 없어요. 회사 사정은 지급 기한을 자동으로 늘려주지 않아요. <strong>내가 동의한 합의</strong>가 있어야 미룰 수 있어요.</p>
+            <p>“다음 달에 꼭 준다”는 말만 반복된다면, 그동안 대화 기록을 남기고 기한을 정해 요구하세요. 사장이 체불 사실을 인정한 문자는 나중에 중요한 증거가 돼요.</p>
+            <ul class="qa-list-ul">
+              <li>“언제까지, 얼마를” 문자로 확정하세요.</li>
+              <li>기한을 넘기면 내용증명을 보내고 진정을 검토하세요.</li>
+              <li>돈이 없다고 하면 간이대지급금 기한(진정 1년, 청구 6개월)을 확인하세요.</li>
+            </ul>
+            <p class="law-line">근로기준법 제36조 · 임금채권보장법 시행령 제7조</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q6</span> 퇴직금 계산서를 달라니까 안 준다고 해요. 못 받나요?</summary>
+          <div class="qa-body">
+            <p>퇴직금 계산내역서는 임금명세서처럼 <strong>반드시 내줘야 하는 서류는 아니에요</strong>. 그래서 안 준다고 바로 법 위반은 아니에요.</p>
+            <p>그래도 요청은 해 보세요. 실제 분쟁이 되면 노동청이 회사에 계산 근거를 요구해요. 매달 받는 <strong>임금명세서</strong>는 교부 의무가 있고, 안 주면 과태료 대상이에요.</p>
+            <ul class="qa-list-ul">
+              <li>급여명세서가 없다면 통장 입금 내역으로 대신하세요.</li>
+              <li>계산이 이상하다면 진정을 내고, 그 과정에서 산정 내역을 확인하세요.</li>
+              <li>퇴직 후에도 사용기간·업무·임금에 관한 증명서는 청구할 수 있어요.</li>
+            </ul>
+            <p class="law-line">근로기준법 제48조 · 제39조</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q7</span> 육아휴직·단축을 썼다고 평가나 배치에서 불리하게 대해요.</summary>
+          <div class="qa-body">
+            <p>육아휴직을 이유로 해고하거나 불리하게 대우하는 것은 법으로 금지돼 있어요. 단축근무도 마찬가지로, 근무시간에 비례한 임금 조정 외에 불리하게 할 수 없어요.</p>
+            <p>“육아휴직을 쓰면 승진이 늦다”, “단축하면 중요한 일은 못 맡긴다”는 식의 말도 기록으로 남겨 두면 도움이 돼요.</p>
+            <ul class="qa-list-ul">
+              <li>인사발령·평가·업무 변경을 날짜순으로 정리하세요.</li>
+              <li>퇴사 종용이나 불이익 발언은 문자로 남기거나 녹음하세요.</li>
+              <li>관할 고용노동지청 진정, 또는 지역 직장맘지원센터의 무료 상담을 이용하세요.</li>
+            </ul>
+            <p class="law-line">남녀고용평등법 제19조 제4항 · 제19조의3 제1항</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q8</span> 회사가 폐업했어요. 밀린 돈 받을 수 있나요?</summary>
+          <div class="qa-body">
+            <p>회사가 돈을 줄 수 없을 때는 <strong>간이대지급금</strong>으로 나라가 먼저 일부를 줘요. 다만 기한이 세 개라 순서가 중요해요.</p>
+            <ul class="qa-list-ul">
+              <li>퇴직한 날의 다음 날부터 <strong>1년 안에</strong> 임금체불 진정을 내세요.</li>
+              <li>‘체불 임금등·사업주 확인서’가 처음 나온 날부터 <strong>6개월 안에</strong> 근로복지공단에 청구하세요.</li>
+              <li>한도는 임금 700만 원 + 퇴직급여 700만 원, 합계 1,000만 원이에요.</li>
+              <li>회사가 퇴직일까지 6개월 이상 사업을 했어야 해요.</li>
+            </ul>
+            <p class="qa-note">최종 3개월 월평균 임금이 400만 원 미만이면 대한법률구조공단(132)의 무료 소송 지원도 알아보세요.</p>
+            <p class="law-line">임금채권보장법 제7조 · 시행령 제9조</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q9</span> 실업급여 신청을 늦게 하면 어떻게 되나요?</summary>
+          <div class="qa-body">
+            <p>실업급여를 받을 수 있는 기간은 <strong>이직일 다음 날부터 12개월</strong>이에요. 신청한 날부터 새로 시작되는 게 아니라서, 늦게 신청하면 남은 기간이 그만큼 줄어요.</p>
+            <p>소정급여일수가 남아 있어도 12개월이 지나면 더 받을 수 없어요. 신청하면 7일은 대기기간으로 급여가 나오지 않아요.</p>
+            <ul class="qa-list-ul">
+              <li>이직하면 되도록 빨리 고용24 또는 관할 고용센터에서 신청하세요.</li>
+              <li>회사가 이직확인서를 안 내면 고용센터에 요청하세요. 10일 넘게 미루면 과태료 대상이에요.</li>
+              <li>임신·출산·육아로 당장 일할 수 없다면 수급기간 연장을 신고할 수 있어요.</li>
+            </ul>
+            <p class="law-line">고용보험법 제48조 · 제49조</p>
+          </div>
+        </details>
+
+        <details class="qa">
+          <summary><span class="q">Q10</span> 합의서에 “향후 이의를 제기하지 않는다”고 써 있는데, 서명해도 되나요?</summary>
+          <div class="qa-body">
+            <p>받을 돈을 <strong>다 받은 뒤</strong>라면 서명할 수 있어요. 문제는 <strong>일부만 받고</strong> 포기 문구에 서명하는 경우예요. 나중에 남은 돈을 청구하기 어려워질 수 있어요.</p>
+            <ul class="qa-list-ul">
+              <li>서명 전에 받은 금액과 받아야 할 금액을 하나씩 대조하세요.</li>
+              <li>일부 지급이라면 “일부 지급”임을 적고, 잔여 청구권은 포기하지 않는다는 문구를 넣으세요.</li>
+              <li>분할 합의는 “기한을 어기면 남은 금액을 즉시 지급” 조항을 넣으세요.</li>
+              <li>서명 전 서류는 사진으로 남겨 두세요.</li>
+            </ul>
+            <p class="qa-note">금액이 크거나 다툼이 있으면 서명 전에 1350이나 공인노무사 상담을 받아 보세요.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <div class="soft-note">
+        <p>여기 정리한 내용은 일반적인 안내예요. 내 사건의 결론은 근무 기록과 회사 자료에 따라 달라질 수 있어요.</p>
+      </div>
+    </section>
+
+  </section>
+
+  <!-- ══════════════ 탭 4 · 이직확인서·신고처 ══════════════ -->
+  <section id="panel-doc" class="tabpanel" role="tabpanel" aria-labelledby="tab-doc" tabindex="0" hidden>
+
+    <section class="panel" id="doc-check" aria-labelledby="doc-title" hidden>
+      <h2 class="section-title" id="doc-title"><span class="step">점검</span> 이직확인서 4칸</h2>
+
+      <p class="checklist-lede">
+        이직확인서는 회사가 고용센터에 내는 서류예요. 여기 적힌 <strong>네 가지</strong>가 실업급여를 좌우해요.
+        ① 이직사유 ② 피보험단위기간 ③ 평균임금 ④ 1일 소정근로시간 — 사본을 받아 한 칸씩 대조해 보세요.
+      </p>
+
+      <p class="doc-verdict" id="doc-verdict"></p>
+      <ul class="check-list" id="doc-items"></ul>
+
+      <h3 class="sub-title">틀렸다면 이 순서로 정정하세요</h3>
+      <ol class="steps">
+        <li><strong>회사 담당자에게 정정 요청</strong> — 사본에 근거자료(급여명세서·단축 합의서·권고사직 관련 메일)를 붙여 서면이나 메일로 요청하고, 요청한 날짜를 남겨 두세요. 이직확인서 발급·제출은 회사의 의무이고, 정당한 요청을 10일 넘게 미루면 과태료가 붙을 수 있어요.</li>
+        <li><strong>관할 고용센터에 처리 확인</strong> — 회사가 응하지 않으면 고용24 또는 1350으로 관할 고용센터에 이직확인서 처리를 확인해 달라고 요청하세요.</li>
+        <li><strong>근로복지공단에 피보험자격 확인청구</strong> — 이직사유·기간·소정근로시간이 사실과 다르면 근로복지공단(1588-0075)에 피보험자격 확인을 청구할 수 있어요. <span class="law">고용보험법 제17조</span></li>
+        <li><strong>결정에 이의가 있으면 심사청구</strong> — 고용센터의 수급자격 결정에 이의가 있으면 결정서를 받은 날부터 90일 안에 심사청구를 할 수 있어요. <span class="law">고용보험법 제87조</span></li>
+      </ol>
+      <p class="hint block">회사가 이직확인서를 사실과 다르게 적어 실업급여를 부정하게 받으면 회사도 책임을 질 수 있어요. 이직확인서를 거짓으로 작성하면 최대 300만 원의 과태료가 붙어요.</p>
+    </section>
+
+    <section class="panel" id="doc-before" aria-labelledby="doc-before-title">
+      <h2 class="section-title" id="doc-before-title"><span class="step">준비</span> 4칸 점검은 이렇게</h2>
+      <p class="panel-lede">먼저 ‘계산하기’ 탭에서 입사일·퇴사일·급여와 이직확인서 사본 내용을 넣고 계산하면, 이 화면에 칸별 점검 결과가 채워져요.</p>
+      <ol class="steps">
+        <li><strong>고용24에서 확인</strong> — 로그인 후 ‘내 보험가입 이력’에서 이직확인서 처리 내용을 봐요.</li>
+        <li><strong>사본과 대조</strong> — 이직사유 코드, 피보험단위기간, 평균임금, 1일 소정근로시간을 하나씩 비교해요.</li>
+        <li><strong>다르면 정정</strong> — 회사 → 고용센터 → 근로복지공단 순서로 요청해요.</li>
+      </ol>
+      <button type="button" class="btn-primary small" data-goto="tab-calc">계산하기 탭으로 가기</button>
+    </section>
+
+    <section class="panel" id="apply" aria-labelledby="apply-title">
+      <h2 class="section-title" id="apply-title"><span class="step">안내</span> 신청 방법과 담당 안내처</h2>
+
+      <h3 class="sub-title">① 실업급여(구직급여)</h3>
+      <div class="facts">
+        <p><strong>1일 지급액 기준</strong> — 2026년 이직자: 상한 <strong>68,100원</strong> / 하한 <strong>66,048원</strong> · 2025년 이직자: 상한 <strong>66,000원</strong> / 하한 <strong>64,192원</strong> (1일 8시간 기준, 하한은 소정근로시간에 비례). 이 화면은 이직일이 속한 해의 기준을 자동으로 적용해요.</p>
+      </div>
+      <ul class="plain-list">
+        <li>이직일 다음 날부터 <strong>12개월</strong>이 지나면 남은 일수가 있어도 받을 수 없어요. 되도록 빨리 신청하세요.</li>
+        <li><strong>고용24</strong> 온라인 신청 또는 <strong>거주지 관할 고용센터</strong> 방문. 신분증과 본인 명의 계좌가 필요하고, 이직확인서는 회사가 고용센터에 제출해요.</li>
+        <li>수급자격을 인정받으면 4주마다 실업인정을 받아야 급여가 나와요.</li>
+      </ul>
+
+      <h3 class="sub-title">② 밀린 임금·퇴직금 진정</h3>
+      <ul class="plain-list">
+        <li><strong>노동포털</strong> → 민원신청 → 근로기준 분야 민원신청 → ‘진정서(임금체불, 기타 근로기준 분야)’. 진정은 무료예요.</li>
+        <li>사업장 소재지 관할 고용노동관서를 방문해 상담 후 접수할 수도 있어요.</li>
+      </ul>
+
+      <h3 class="sub-title">③ 회사가 돈을 줄 수 없을 때(간이대지급금)</h3>
+      <ul class="plain-list">
+        <li>퇴직한 날의 <strong>다음 날부터 1년 안에</strong> 임금체불 진정을 내야 해요.</li>
+        <li>진정 뒤 받은 <strong>체불 임금등·사업주 확인서가 처음 발급된 날부터 6개월 안에</strong> 근로복지공단에 청구해요.</li>
+        <li>최종 3개월분 임금 <strong>700만 원</strong> + 최종 3년분 퇴직급여 <strong>700만 원</strong>, 합계 <strong>1,000만 원</strong>까지.</li>
+        <li>회사가 산재보험 적용 대상이면서 내가 퇴직한 날까지 <strong>6개월 이상</strong> 사업을 했어야 해요.</li>
+      </ul>
+
+      <div class="agencies">
+        <a class="agency" href="tel:1350">
+          <span class="agency-name">고용노동부 고객상담센터</span>
+          <span class="agency-num">1350 (국번 없이)</span>
+          <span class="agency-desc">평일 09~18시 · 수급자격·이직확인서·임금체불 상담</span>
+        </a>
+        <a class="agency" href="https://www.work24.go.kr/cm/c/d/0190/retrieveInstSrchLst.do" target="_blank" rel="noopener">
+          <span class="agency-name">고용24 — 가까운 고용센터 찾기</span>
+          <span class="agency-num">work24.go.kr</span>
+          <span class="agency-desc">내 주소지 관할 고용센터와 연락처 확인</span>
+        </a>
+        <a class="agency" href="https://labor.moel.go.kr" target="_blank" rel="noopener">
+          <span class="agency-name">고용노동부 노동포털</span>
+          <span class="agency-num">labor.moel.go.kr</span>
+          <span class="agency-desc">임금체불·퇴직금 진정 온라인 접수</span>
+        </a>
+        <a class="agency" href="https://www.kcomwel.or.kr" target="_blank" rel="noopener">
+          <span class="agency-name">근로복지공단</span>
+          <span class="agency-num">1588-0075</span>
+          <span class="agency-desc">간이대지급금·피보험자격 확인 문의</span>
+        </a>
+        <a class="agency" href="https://www.klac.or.kr" target="_blank" rel="noopener">
+          <span class="agency-name">대한법률구조공단</span>
+          <span class="agency-num">132 (국번 없이)</span>
+          <span class="agency-desc">최종 3개월 월평균 임금 400만 원 미만이면 무료 소송 지원</span>
+        </a>
+        <div class="agency">
+          <span class="agency-name">직장맘지원센터</span>
+          <span class="agency-num">지역별 운영 · 무료 노무 상담</span>
+          <span class="agency-desc">육아휴직·단축·임금 문제를 공인노무사가 상담해 줘요. ‘직장맘지원센터’로 검색해 가까운 곳을 찾아보세요.</span>
         </div>
-        <p class="hint block">코드 번호는 고용보험 상실신고·이직확인서의 구분코드예요. 사본의 ‘이직사유’ 칸에 적힌 글자와 코드를 함께 확인해 주세요.</p>
-      </fieldset>
-
-      <p class="form-error" id="form-error" role="alert" hidden></p>
-
-      <div class="form-actions">
-        <button type="submit" class="btn-primary" id="calc-submit">정산액 계산하기</button>
-        <button type="button" class="btn-ghost" id="fill-example">예시 값으로 보기</button>
+        <div class="agency">
+          <span class="agency-name">공인노무사 상담</span>
+          <span class="agency-num">1350에서 지역 상담처 안내</span>
+          <span class="agency-desc">금액이 크거나 다툼이 있으면 1회 감수를 받아 보세요</span>
+        </div>
       </div>
-      <p class="privacy">입력한 값은 이 브라우저 안에서만 계산되고, 어디로도 전송되지 않아요.</p>
-    </form>
-  </section>
+    </section>
 
-  <!-- ───────────── 결과 ───────────── -->
-  <section class="panel results" id="result-panel" aria-labelledby="result-title" hidden>
-    <h2 class="section-title" id="result-title" tabindex="-1"><span class="step">결과</span> 예상 정산 내역</h2>
+    <section class="panel links" aria-labelledby="links-title">
+      <h2 class="section-title" id="links-title">더 확인해 보세요</h2>
 
-    <div id="warnings" class="warnings" aria-live="polite"></div>
-    <div id="summary-line" class="summary-line"></div>
-    <p class="basis-line" id="basis-line"></p>
-
-    <div id="cards"></div>
-
-    <div class="total" id="total-block">
-      <div class="total-head">
-        <span class="total-label">최대 예상 청구액</span>
-        <span class="total-sub" id="total-sub"></span>
-      </div>
-      <p class="total-amount" id="total-amount">0원</p>
-      <ul class="total-list" id="total-list"></ul>
-      <div class="total-actions">
-        <button type="button" class="btn-primary small" id="copy-result">결과 복사</button>
-        <button type="button" class="btn-ghost small" id="print-result">인쇄 · PDF 저장</button>
-      </div>
-      <p class="total-note" id="copy-status" role="status"></p>
-    </div>
-
-    <p class="estimate-note">
-      위 금액은 회사가 해당 항목을 하나도 지급하지 않았다고 가정한 <strong>최대 추정액</strong>입니다. 이미 받은 항목은 체크를 풀어 주세요.
-      실제 정산액은 회사 규정·상여금·근무기록에 따라 달라지고, 청구할 때는 계산 근거 자료를 함께 내야 합니다.
-    </p>
-  </section>
-
-  <!-- ───────────── 이직확인서 4칸 점검 ───────────── -->
-  <section class="panel" id="doc-check" aria-labelledby="doc-title" hidden>
-    <h2 class="section-title" id="doc-title"><span class="step">점검</span> 이직확인서 4칸</h2>
-
-    <p class="checklist-lede">
-      이직확인서는 회사가 고용센터에 내는 서류로, 여기 적힌 <strong>네 가지</strong>가 실업급여를 좌우해요.
-      ① 이직사유 ② 피보험단위기간 ③ 평균임금 ④ 1일 소정근로시간 — 사본을 받아 한 칸씩 대조해 보세요.
-    </p>
-
-    <p class="doc-verdict" id="doc-verdict"></p>
-    <ul class="check-list" id="doc-items"></ul>
-
-    <h3 class="sub-title">틀렸다면 이 순서로 정정하세요</h3>
-    <ol class="steps">
-      <li><strong>회사 담당자에게 정정 요청</strong> — 이직확인서 사본에 근거자료(급여명세서·단축 합의서·권고사직 관련 메일)를 붙여 서면이나 메일로 요청하고, 요청한 날짜를 남겨 두세요. 이직확인서 발급·제출은 회사의 의무이고, 정당한 요청을 10일 넘게 미루면 과태료가 붙을 수 있어요.</li>
-      <li><strong>관할 고용센터에 처리 확인</strong> — 회사가 응하지 않으면 고용24 또는 1350으로 관할 고용센터에 이직확인서 처리를 확인해 달라고 요청하세요.</li>
-      <li><strong>근로복지공단에 피보험자격 확인청구</strong> — 이직사유·기간·소정근로시간이 사실과 다르면 근로복지공단(1588-0075)에 피보험자격 확인을 청구할 수 있어요(고용보험법 제15조).</li>
-      <li><strong>결정에 이의가 있으면 심사청구</strong> — 고용센터의 수급자격 결정에 이의가 있으면 결정서를 받은 날부터 90일 안에 심사청구를 할 수 있어요(고용보험법 제87조).</li>
-    </ol>
-    <p class="hint block">회사가 이직확인서를 사실과 다르게 적어 실업급여를 부정하게 받으면 회사도 책임을 질 수 있어요. 사직서에 ‘개인 사정’이라고 썼더라도, 실제로 권고를 받은 자료(메신저·회의 기록·인원감축 공지)가 있으면 다투어 볼 수 있습니다.</p>
-  </section>
-
-  <!-- ───────────── 신청 방법 · 안내처 ───────────── -->
-  <section class="panel" id="apply" aria-labelledby="apply-title">
-    <h2 class="section-title" id="apply-title"><span class="step">안내</span> 신청 방법과 담당 안내처</h2>
-
-    <h3 class="sub-title">① 실업급여(구직급여)</h3>
-    <div class="facts">
-      <p><strong>1일 지급액 기준</strong> — 2026년 이직자: 상한 <strong>68,100원</strong> / 하한 <strong>66,048원</strong> · 2025년 이직자: 상한 <strong>66,000원</strong> / 하한 <strong>64,192원</strong> (1일 8시간 기준, 하한은 소정근로시간에 비례). 이 화면은 이직일이 속한 해의 기준을 자동으로 적용합니다.</p>
-    </div>
-    <ul class="plain-list">
-      <li>이직일 다음 날부터 <strong>12개월</strong>이 지나면 남은 소정급여일수가 있어도 받을 수 없어요. 이직하면 되도록 빨리 신청하세요.</li>
-      <li><strong>고용24</strong> 온라인 신청 또는 <strong>거주지 관할 고용센터</strong> 방문. 신분증과 본인 명의 계좌가 필요하고, 이직확인서는 회사가 고용센터에 제출합니다.</li>
-      <li>수급자격을 인정받으면 4주마다 실업인정을 받아야 급여가 나옵니다.</li>
-    </ul>
-
-    <h3 class="sub-title">② 밀린 임금·퇴직금 진정</h3>
-    <ul class="plain-list">
-      <li><strong>노동포털</strong> → 민원신청 → 근로기준 분야 민원신청 → ‘진정서(임금체불, 기타 근로기준 분야)’. 진정은 무료예요.</li>
-      <li>사업장 소재지 관할 고용노동관서를 방문해 상담 후 접수할 수도 있습니다.</li>
-    </ul>
-
-    <h3 class="sub-title">③ 회사가 돈을 줄 수 없을 때(간이대지급금)</h3>
-    <ul class="plain-list">
-      <li>퇴직한 날의 <strong>다음 날부터 1년 안에</strong> 임금체불 진정을 내야 해요.</li>
-      <li>진정 뒤 받은 <strong>체불 임금등·사업주 확인서가 처음 발급된 날부터 6개월 안에</strong> 근로복지공단에 청구합니다. 진정 기한과 청구 기한은 서로 다릅니다.</li>
-      <li>최종 3개월분 임금 <strong>700만 원</strong> + 최종 3년분 퇴직급여 <strong>700만 원</strong>, 합계 <strong>1,000만 원</strong>까지.</li>
-      <li>회사가 산재보험 적용 대상이면서 내가 퇴직한 날까지 <strong>6개월 이상</strong> 사업을 했어야 해요.</li>
-    </ul>
-
-    <div class="agencies">
-      <a class="agency" href="tel:1350">
-        <span class="agency-name">고용노동부 고객상담센터</span>
-        <span class="agency-num">1350 (국번 없이)</span>
-        <span class="agency-desc">평일 09~18시 · 수급자격·이직확인서·임금체불 상담</span>
-      </a>
-      <a class="agency" href="https://www.work24.go.kr/cm/c/d/0190/retrieveInstSrchLst.do" target="_blank" rel="noopener">
-        <span class="agency-name">고용24 — 가까운 고용센터 찾기</span>
-        <span class="agency-num">work24.go.kr</span>
-        <span class="agency-desc">내 주소지 관할 고용센터와 연락처 확인</span>
-      </a>
-      <a class="agency" href="https://labor.moel.go.kr" target="_blank" rel="noopener">
-        <span class="agency-name">고용노동부 노동포털</span>
-        <span class="agency-num">labor.moel.go.kr</span>
-        <span class="agency-desc">임금체불·퇴직금 진정 온라인 접수</span>
-      </a>
-      <a class="agency" href="https://www.kcomwel.or.kr" target="_blank" rel="noopener">
-        <span class="agency-name">근로복지공단</span>
-        <span class="agency-num">1588-0075</span>
-        <span class="agency-desc">간이대지급금·피보험자격 확인 문의</span>
-      </a>
-      <a class="agency" href="https://www.klac.or.kr" target="_blank" rel="noopener">
-        <span class="agency-name">대한법률구조공단</span>
-        <span class="agency-num">132 (국번 없이)</span>
-        <span class="agency-desc">최종 3개월 월평균 임금 400만 원 미만이면 무료 소송 지원</span>
-      </a>
-      <div class="agency">
-        <span class="agency-name">공인노무사 상담</span>
-        <span class="agency-num">1350에서 지역 상담처 안내</span>
-        <span class="agency-desc">금액이 크거나 다툼이 있으면 1회 감수를 받아 보세요</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────────── 진정 준비 ───────────── -->
-  <section class="panel" id="checklist" aria-labelledby="checklist-title">
-    <h2 class="section-title" id="checklist-title"><span class="step">진정</span> 진정 전에 챙길 것</h2>
-
-    <p class="checklist-lede">계산한 금액을 회사에 요구해도 해결되지 않으면, 고용노동부에 <strong>임금체불 진정</strong>을 낼 수 있어요. 진정은 무료입니다.</p>
-
-    <ol class="steps">
-      <li><strong>금액 정리</strong> — 항목별 체불 금액과 계산 근거를 표로 정리</li>
-      <li><strong>지급 요구</strong> — 내용증명이나 문자로 기한을 정해 요구 (선택이지만 도움이 돼요)</li>
-      <li><strong>진정 접수</strong> — 노동포털 온라인 또는 사업장 관할 고용노동관서 방문</li>
-      <li><strong>조사·시정</strong> — 근로감독관이 양쪽을 불러 조사하고, 확인되면 지급 지시</li>
-    </ol>
-
-    <h3 class="sub-title">증빙 준비 체크리스트</h3>
-    <ul class="evidence">
-      <li><label><input type="checkbox"> 근로계약서, 육아기 근로시간 단축 합의서(서면)</label></li>
-      <li><label><input type="checkbox"> 임금명세서 또는 급여 명세 (최근 3년)</label></li>
-      <li><label><input type="checkbox"> 급여 통장 입금 내역</label></li>
-      <li><label><input type="checkbox"> 출퇴근 기록, 근무표, 업무 메신저·메일</label></li>
-      <li><label><input type="checkbox"> 육아휴직 확인서, 육아기 근로시간 단축 확인서</label></li>
-      <li><label><input type="checkbox"> 연차 사용대장(연차 발생·사용 내역)</label></li>
-      <li><label><input type="checkbox"> 이직확인서 사본</label></li>
-      <li><label><input type="checkbox"> 퇴사일을 알 수 있는 서류(사직서, 상실신고 내역)</label></li>
-    </ul>
-
-    <div class="facts">
-      <p><strong>임금채권 시효는 3년</strong>이에요. 급여 지급일부터 3년이 지나면 청구할 수 없으니 서두르세요. <span class="law">근로기준법 제49조</span></p>
-      <p><strong>퇴직 후 14일</strong>이 지나도 주지 않으면 <strong>연 20% 지연이자</strong>를 청구할 수 있어요. <span class="law">근로기준법 제36조·제37조</span></p>
-      <p><strong>2026년 10월 8일부터</strong> 임금·수당 체불은 <strong>5년 이하 징역 또는 5천만 원 이하 벌금</strong>으로 처벌 수위가 올라갔어요. <span class="law">근로기준법 제107조</span></p>
-      <p><strong>퇴직금 체불은 별도 법률</strong>이에요. <strong>2026년 9월 18일부터</strong> 퇴직금을 주지 않으면 <strong>5년 이하 징역 또는 5천만 원 이하 벌금</strong>이고, 벌칙 조문도 제43조로 옮겨졌어요. <span class="law">근로자퇴직급여 보장법 제43조(2026.9.18 시행)</span></p>
-      <p>회사가 지급 능력이 없어 보이면 <strong>간이대지급금</strong>을 검토하세요. 진정은 퇴직 다음 날부터 1년 안에, 근로복지공단 청구는 확인서 최초 발급일부터 6개월 안에 해야 해요.</p>
-    </div>
-
-    <div class="inline-links">
-      <a class="btn-primary small" href="https://labor.moel.go.kr" target="_blank" rel="noopener">노동포털에서 진정 신청</a>
-      <a class="btn-ghost small" href="tel:1350">1350 상담 (평일 09~18시)</a>
-    </div>
-  </section>
-
-  <!-- ───────────── 도움 링크 ───────────── -->
-  <section class="panel links" aria-labelledby="links-title">
-    <h2 class="section-title" id="links-title">더 확인해 보세요</h2>
-
-    <a class="link-card primary-link" href="https://moagool-momlab-kr.deed.page/?tab=benefits" target="_blank" rel="noopener">
-      <span class="link-emoji" aria-hidden="true">💰</span>
-      <span class="link-text">
-        <strong>2026 육아·생활 지원금 한눈에 보기</strong>
-        <span>출산·육아 지원금과 감면 혜택을 조건별로 확인</span>
-      </span>
-      <span class="link-arrow" aria-hidden="true">›</span>
-    </a>
-
-    <a class="link-card" href="https://www.work24.go.kr" target="_blank" rel="noopener">
-      <span class="link-emoji" aria-hidden="true">🧾</span>
-      <span class="link-text">
-        <strong>고용24 실업급여 모의계산</strong>
-        <span>내 이직확인서 기준 예상 수급액 확인</span>
-      </span>
-      <span class="link-arrow" aria-hidden="true">›</span>
-    </a>
-
-    <a class="link-card" href="https://www.easylaw.go.kr" target="_blank" rel="noopener">
-      <span class="link-emoji" aria-hidden="true">📖</span>
-      <span class="link-text">
-        <strong>찾기쉬운 생활법령정보</strong>
-        <span>육아휴직·근로시간 단축 제도 원문 안내</span>
-      </span>
-      <span class="link-arrow" aria-hidden="true">›</span>
-    </a>
-
-    <!-- SLOT: 크몽·가이드북 링크를 넣을 자리 (링크가 생기면 hidden만 지우면 됩니다) -->
-    <div class="link-slot" id="link-slot-guide" hidden>
-      <a class="link-card" id="link-guide" href="#" target="_blank" rel="noopener">
-        <span class="link-emoji" aria-hidden="true">📘</span>
+      <a class="link-card primary-link" href="https://moagool-momlab-kr.deed.page/?tab=benefits" target="_blank" rel="noopener">
+        <span class="link-emoji" aria-hidden="true">💰</span>
         <span class="link-text">
-          <strong>퇴사 정산 가이드북</strong>
-          <span>계산 근거와 진정서 작성 예시를 정리한 자료</span>
+          <strong>2026 육아·생활 지원금 한눈에 보기</strong>
+          <span>출산·육아 지원금과 감면 혜택을 조건별로 확인</span>
         </span>
         <span class="link-arrow" aria-hidden="true">›</span>
       </a>
-    </div>
+
+      <a class="link-card" href="https://www.work24.go.kr" target="_blank" rel="noopener">
+        <span class="link-emoji" aria-hidden="true">🧾</span>
+        <span class="link-text">
+          <strong>고용24 실업급여 모의계산</strong>
+          <span>내 이직확인서 기준 예상 수급액 확인</span>
+        </span>
+        <span class="link-arrow" aria-hidden="true">›</span>
+      </a>
+
+      <a class="link-card" href="https://www.easylaw.go.kr" target="_blank" rel="noopener">
+        <span class="link-emoji" aria-hidden="true">📖</span>
+        <span class="link-text">
+          <strong>찾기쉬운 생활법령정보</strong>
+          <span>육아휴직·근로시간 단축 제도 원문 안내</span>
+        </span>
+        <span class="link-arrow" aria-hidden="true">›</span>
+      </a>
+
+      <!-- SLOT: 크몽·가이드북 링크를 넣을 자리 (링크가 생기면 hidden만 지우면 됩니다) -->
+      <div class="link-slot" id="link-slot-guide" hidden>
+        <a class="link-card" id="link-guide" href="#" target="_blank" rel="noopener">
+          <span class="link-emoji" aria-hidden="true">📘</span>
+          <span class="link-text">
+            <strong>퇴사 정산 가이드북</strong>
+            <span>계산 근거와 진정서 작성 예시를 정리한 자료</span>
+          </span>
+          <span class="link-arrow" aria-hidden="true">›</span>
+        </a>
+      </div>
+    </section>
+
   </section>
 
 </main>
@@ -477,5 +860,6 @@
 </footer>
 
 <script src="app.js"></script>
+<script src="tabs.js"></script>
 </body>
 </html>
